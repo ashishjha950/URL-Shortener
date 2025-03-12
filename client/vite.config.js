@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [react(),tailwindcss(),],
   server: {
     proxy:{
-      '/api': 'https://url-shortener-bpje.onrender.com'
+      '/api': 'https://url-shortener-backend-t5v0.onrender.com'
     },
   },
 })
