@@ -13,7 +13,7 @@ dotenv.config()
 dbConnection()
 
 app.use(cors({
-    origin: ['https://url-shortener-frontend-k0fm.onrender.com'],
+    origin: ['*'],
     methods: ['GET','POST'],
     credentials: true
 }))
