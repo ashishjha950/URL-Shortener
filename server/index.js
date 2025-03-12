@@ -12,7 +12,11 @@ dotenv.config()
 
 dbConnection()
 
-app.use(cors())
+app.use(cors({
+    origin: ['https://url-shortener-frontend-k0fm.onrender.com'],
+    methods: ['GET','POST'],
+    credentials: true
+}))
 app.use(cookieParser())
 app.use(express.json())
 app.use(bodyParser.json())
