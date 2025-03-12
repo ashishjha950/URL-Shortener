@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -21,11 +21,11 @@ const ShortUrl = () => {
   const submitForm = async(e) => {
     e.preventDefault();
     try {
+      setIsLoading(true)
       const response = await axios.post("/api/shortUrl", { originalUrl: formData })
       setFormData({
         url: "",
       })
-      setIsLoading(true)
       toast.success(response.data.message,{autoClose:1000})
       navigate('/allShortUrls')
 

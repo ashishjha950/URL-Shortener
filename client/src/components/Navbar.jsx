@@ -14,9 +14,9 @@ const Navbar = () => {
     const navigate = useNavigate();
 
     const Logout = () => {
+        setIsLoading(true)
         cookies.remove('token');
         setIsLoggedIn(false)
-        setIsLoading(true)
         navigate('/login');
     };
 

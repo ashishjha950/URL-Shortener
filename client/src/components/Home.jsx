@@ -23,6 +23,7 @@ const Home = () => {
     const SubmitForm = async(e) => {
         e.preventDefault();
         try {
+            setIsLoading(true)
             const res = await axios.post('/api/User', {formData})
             setFormData({
                 fullName: "",
@@ -30,7 +31,6 @@ const Home = () => {
                 password: "",
             })
 
-            setIsLoading(true)
             toast.success(res.data, { autoClose: 1000 })    
             setIsLoggedIn(true)           
             navigate('/allShortUrls')

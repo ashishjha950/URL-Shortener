@@ -8,11 +8,14 @@ const AllShortUrls = () => {
   const [fetchedData, setFetchedData] = useState([]);
   const {isLoading,setIsLoading} = useGlobalContext()
 
-  useEffect(() => {
-    axios
-      .get("/api/shortUrl")
-      .then((response) => setFetchedData(response.data))
-      .then(()=> setIsLoading(false))
+  useEffect(()=>{
+    const fetchData = async() => {
+      setIsLoading(true)
+      const response = await axios.get("/api/shortUrl")
+      setFetchedData(response.data)
+      setIsLoading(false)
+    }
+    fetchData()
   }, []);
 
   return (
