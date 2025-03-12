@@ -22,10 +22,10 @@ const Login = () => {
     const SubmitForm = async (e) => {
         e.preventDefault();
         try {
+            setIsLoading(true)
             const response = await axios.post('/api/User/login', {formData})
             toast.success(response.data.message, { autoClose: 1000 });
             setIsLoggedIn(true)
-            setIsLoading(true)
             navigate('/allShortUrls');            
         } catch (error) {
             toast.error(error.response?.data || 'Something went wrong', { autoClose: 1000 });
