@@ -30,6 +30,7 @@ const Login = () => {
         } catch (error) {
             toast.error(error.response?.data || 'Something went wrong', { autoClose: 1000 });
             console.error(error)
+            setIsLoading(false)
         }
     };
 

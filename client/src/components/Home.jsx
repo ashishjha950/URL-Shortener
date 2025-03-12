@@ -34,6 +34,7 @@ const Home = () => {
             toast.success(res.data, { autoClose: 1000 })    
             setIsLoggedIn(true)           
             navigate('/allShortUrls')
+            setIsLoading(false)
                 
         } catch (error) {
             toast.error(error.response?.data || 'Something went wrong',{autoClose:1000})
