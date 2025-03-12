@@ -25,6 +25,8 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use('/api/ShortUrl',ShortUrl)
 app.use('/api/User',User)
 
-app.listen(process.env.PORT,()=>{
-    console.log('server started at port',process.env.PORT)
+const port = process.env.PORT;
+
+app.listen(port,()=>{
+    console.log('server started at port',port)
 })
