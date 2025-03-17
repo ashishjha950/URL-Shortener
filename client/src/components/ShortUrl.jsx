@@ -11,7 +11,8 @@ const ShortUrl = () => {
     url: "",
   });
   const {isLoading,setIsLoading,apiUrl} = useGlobalContext()
-  setIsLoading(false)
+
+  useEffect(()=> setIsLoading(false),[setIsLoading])
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
