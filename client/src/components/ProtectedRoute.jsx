@@ -1,37 +1,40 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
-import Cookies from 'universal-cookie';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { useGlobalContext } from './GlobalProvider';
+import RiseLoader from 'react-spinners/RiseLoader';
 
 const ProtectedRoute = ({ children }) => {
     const { apiUrl } = useGlobalContext();
-    const cookies = new Cookies(); 
-    
-    useEffect(() => {
-        const verifyToken = async () => {
-            try {
-                await axios.get(`${apiUrl}`, { withCredentials: true });
-                const token = cookies.get('token'); 
-                console.log(token);
+    const [isAuthorized, setIsAuthorized] = useState(null);
 
-                if (!token) {
-                    toast.warning('Login to access URLs', { autoClose: 1000 });
+    useEffect(() => {
+        const checkAuth = async () => {
+            try {
+                const response = await axios.get(`${apiUrl}`, { withCredentials: true });
+
+                if (response.status === 200) {
+                    setIsAuthorized(true); 
+                } else {
+                    throw new Error('Unauthorized');
                 }
             } catch (error) {
-                console.error('Error verifying token:', error);
-                toast.error('Unauthorized. Redirecting to login.', { autoClose: 1000 });
+                setIsAuthorized(false);
+                toast.warning('Login to access URLs', { autoClose: 1000 });
             }
         };
 
-        verifyToken();
-    }, [apiUrl, cookies]);
+        checkAuth();
+    }, [apiUrl]);
 
-    if (!cookies.get('token')) {
-        return <Navigate to="/login" replace />;
-    }
+    // Show loading spinner or message while authorization is checked
+    if (isAuthorized === null) return <div className='flex items-center justify-center'><RiseLoader/></div>;
 
+    // Redirect to login page if not authorized
+    if (isAuthorized === false) return <Navigate to="/login" replace />;
+
+    // Render the children if authorized
     return children;
 };
 

@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import ShortUrl from './routes/ShortUrl.js'
 import User from './routes/User.js'
 import cookieParser from 'cookie-parser'
+import {verification,logout} from './authentication/auth.js';
 
 const app = express()
 dotenv.config()
@@ -23,9 +24,8 @@ app.use(express.json())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.get('/api',(req,res)=>{
-    res.send('Server is running')
-})
+app.get('/api',verification)
+app.get('/api/logout',logout)
 
 app.use('/api/ShortUrl',ShortUrl)
 app.use('/api/User',User)

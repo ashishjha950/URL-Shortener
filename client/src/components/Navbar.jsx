@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthProvider";
-import cookies from "js-cookie";
 import { CiMenuBurger } from "react-icons/ci";
 import { FaPlus } from "react-icons/fa";
 import {useGlobalContext} from './GlobalProvider'
 import logo from '../assets/logo.png'
+import axios from "axios";
 
 const Navbar = () => {
     const {isLoggedIn, setIsLoggedIn} = useAuth();
     const [isMenuOpen, setIsMenuOpen] = useState(false)
-    const {setIsLoading} = useGlobalContext()
+    const {setIsLoading,apiUrl} = useGlobalContext()
     const navigate = useNavigate();
 
     const Logout = () => {
         setIsLoading(true)
-        cookies.remove('token');
+        axios.get(`${apiUrl}/logout`, { withCredentials: true });
         setIsLoggedIn(false)
         navigate('/login');
     };
