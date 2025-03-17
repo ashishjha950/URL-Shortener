@@ -4,7 +4,7 @@ import cookies from 'js-cookie'
 import { toast } from 'react-toastify'
 
 const ProtectedRoute = ({children}) => {
-    const token = cookies.get('token')
+    const token = cookies.get('token',{ secure: true, sameSite: 'Strict'})
     console.log(token)
 
     useEffect(() => {
@@ -14,7 +14,8 @@ const ProtectedRoute = ({children}) => {
     }, [token])
 
    if(!token){
-    return <Navigate to='/login' replace/>}
+    return <Navigate to='/login' replace/>
+    }
 
     return children
     
