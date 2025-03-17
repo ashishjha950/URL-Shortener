@@ -9,13 +9,13 @@ const Redirect = () => {
     const [formData, setFormData] = useState({ shortID: '' });
     
     const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
-    const {isLoading,setIsLoading} = useGlobalContext()
+    const {isLoading,setIsLoading,apiUrl} = useGlobalContext()
 
     const submitForm = async (e) => {
         e.preventDefault();
         try {
             setIsLoading(true)
-            const response = await axios.get(`/api/shortUrl/${formData.shortID}`);
+            const response = await axios.get(`${apiUrl}/shortUrl/${formData.shortID}`,{ withCredentials: true });
             window.location.href = response.data;
         } catch (error) {
           toast.error(error.response.data,{autoClose:1000})
@@ -42,7 +42,7 @@ const Redirect = () => {
                             className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
                         />
                     </div>
-                    <button type="submit" className="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition duration-300 ease-in-out">Redirect</button>
+                    <button type="submit" className="w-full bg-blue-500 text-white py-3 rounded-lg hover:cursor-pointer hover:bg-blue-600 transition duration-300 ease-in-out">Redirect</button>
                 </form>
             </div>
             }

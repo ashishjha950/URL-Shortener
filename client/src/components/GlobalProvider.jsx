@@ -4,9 +4,10 @@ const GlobalContext = createContext();
 
 const GlobalProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const apiUrl = import.meta.env.VITE_API_URL
 
   return (
-    <GlobalContext.Provider value={{isLoading, setIsLoading }}>
+    <GlobalContext.Provider value={{isLoading, setIsLoading,apiUrl }}>
       {children}
     </GlobalContext.Provider>
   );

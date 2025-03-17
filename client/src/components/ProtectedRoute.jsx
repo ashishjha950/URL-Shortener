@@ -1,4 +1,4 @@
-import React from 'react'
+import {useEffect} from 'react'
 import { Navigate } from 'react-router-dom'
 import cookies from 'js-cookie'
 import { toast } from 'react-toastify'
@@ -6,8 +6,13 @@ import { toast } from 'react-toastify'
 const ProtectedRoute = ({children}) => {
     const token = cookies.get('token')
 
+    useEffect(() => {
+        if (!token) {
+            toast.warning('Login to access URLs', { autoClose: 1000 });
+        }
+    }, [token])
+
    if(!token){
-    toast.warning('Login to access URLs',{autoClose:1000})
     return <Navigate to='/login' replace/>}
 
     return children

@@ -10,7 +10,7 @@ import {useGlobalContext} from './GlobalProvider'
 const Login = () => {
     const [formData, setFormData] = useState({ email: "", password: "" });
     const [showPassword, setShowPassword] = useState(false)
-    const {isLoading,setIsLoading} = useGlobalContext()
+    const {isLoading,setIsLoading,apiUrl} = useGlobalContext()
     const {setIsLoggedIn} = useAuth()
     const navigate = useNavigate();
 
@@ -23,7 +23,7 @@ const Login = () => {
         e.preventDefault();
         try {
             setIsLoading(true)
-            const response = await axios.post('/api/User/login', {formData})
+            const response = await axios.post(`${apiUrl}/User/login`, {formData},{ withCredentials: true })
             toast.success(response.data.message, { autoClose: 1000 });
             setIsLoggedIn(true)
             navigate('/allShortUrls');            
@@ -72,7 +72,7 @@ const Login = () => {
                             </button>
                         </div>
                     </div>
-                    <button type="submit" className="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition duration-300 ease-in-out">Login</button>
+                    <button type="submit" className="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 hover:cursor-pointer transition duration-300 ease-in-out">Login</button>
                 </form>
                 <div className="text-right mt-2 text-blue-600">
                     <Link to="/register">Don't have an Account?</Link>

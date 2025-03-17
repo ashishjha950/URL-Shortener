@@ -6,12 +6,12 @@ import {useGlobalContext} from './GlobalProvider'
 
 const AllShortUrls = () => {
   const [fetchedData, setFetchedData] = useState([]);
-  const {isLoading,setIsLoading} = useGlobalContext()
+  const {isLoading,setIsLoading,apiUrl} = useGlobalContext()
 
   useEffect(()=>{
     const fetchData = async() => {
       setIsLoading(true)
-      const response = await axios.get("/api/shortUrl")
+      const response = await axios.get(`${apiUrl}/shortUrl`,{ withCredentials: true })
       setFetchedData(response.data)
       setIsLoading(false)
     }

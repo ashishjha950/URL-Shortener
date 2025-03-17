@@ -13,7 +13,7 @@ const Home = () => {
         email: "",
         password: "",
     });
-    const {isLoading,setIsLoading} = useGlobalContext()
+    const {isLoading,setIsLoading,apiUrl} = useGlobalContext()
     const [showPassword, setShowPassword] = useState(false)
     const {setIsLoggedIn} = useAuth()
     const navigate = useNavigate()
@@ -24,7 +24,7 @@ const Home = () => {
         e.preventDefault();
         try {
             setIsLoading(true)
-            const res = await axios.post('/api/User', {formData})
+            const res = await axios.post(`${apiUrl}/User`, {formData},{ withCredentials: true })
             setFormData({
                 fullName: "",
                 email: "",
@@ -91,7 +91,7 @@ const Home = () => {
                         </button>
                     </div>
                 </div>
-                <button type="submit" className="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition duration-300 ease-in-out">Register</button>
+                <button type="submit" className="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 hover:cursor-pointer transition duration-300 ease-in-out">Register</button>
             </form>
             }
         </div>

@@ -10,7 +10,7 @@ const ShortUrl = () => {
   const [formData, setFormData] = useState({
     url: "",
   });
-  const {isLoading,setIsLoading} = useGlobalContext()
+  const {isLoading,setIsLoading,apiUrl} = useGlobalContext()
   setIsLoading(false)
 
   const handleChange = (e) => {
@@ -22,7 +22,7 @@ const ShortUrl = () => {
     e.preventDefault();
     try {
       setIsLoading(true)
-      const response = await axios.post("/api/shortUrl", { originalUrl: formData })
+      const response = await axios.post(`${apiUrl}/shortUrl`,{ originalUrl: formData },{ withCredentials: true })
       setFormData({
         url: "",
       })
@@ -52,14 +52,14 @@ const ShortUrl = () => {
           />
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out"
+            className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 hover:cursor-pointer transition duration-300 ease-in-out"
           >
             Submit
           </button>
         </form>
         <Link to="/allShortUrls">
           <button
-            className="w-full bg-purple-500 text-white py-2 rounded-md hover:bg-purple-600 transition duration-300 ease-in-out mt-4"
+            className="w-full bg-purple-500 text-white py-2 rounded-md hover:bg-purple-600 hover:cursor-pointer transition duration-300 ease-in-out mt-4"
           >
             My Urls
           </button>
