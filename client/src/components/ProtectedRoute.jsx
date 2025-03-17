@@ -5,6 +5,7 @@ import { toast } from 'react-toastify'
 
 const ProtectedRoute = ({children}) => {
     const token = cookies.get('token')
+    console.log(token)
 
     useEffect(() => {
         if (!token) {
