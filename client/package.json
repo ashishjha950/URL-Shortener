@@ -1,5 +1,5 @@
 {
-  "homepage":"https://github.com/ashishjha950/URL-Shortener/tree/main/client",
+  "homepage": "https://github.com/ashishjha950/URL-Shortener/tree/main/client",
   "name": "client",
   "private": true,
   "version": "0.0.0",
@@ -9,7 +9,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "predeploy":"npm run build",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
   "dependencies": {
@@ -17,6 +17,7 @@
     "axios": "^1.8.1",
     "js-cookie": "^3.0.5",
     "react": "^19.0.0",
+    "react-cookie": "^8.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.2.0",
