@@ -20,8 +20,8 @@ const App = () => {
       <ToastContainer/>
       <Navbar/>
         <Routes>
-          <Route path='/' element={<ShortUrl/>} />
-          <Route path='/allShortUrls' element={<AllShortUrls/>} />
+          <Route path='/' element={<ProtectedRoute><ShortUrl/></ProtectedRoute>} />
+          <Route path='/allShortUrls' element={<ProtectedRoute><AllShortUrls/></ProtectedRoute>} />
           <Route path='/register' element={<Home/>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='/redirect' element={<Redirect/>} />
