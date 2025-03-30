@@ -14,7 +14,7 @@ const verifyUser=async(req,res)=>{
 
         let token = jwt.sign({id:user._id,email:user.email},process.env.JWT_SECRET,{expiresIn:'1h'})
         
-        return res.cookie('token',token, { httpOnly: true }).status(200).json({message:'Successfully Login'})
+        return res.cookie('token',token).status(200).json({message:'Successfully Login'})
     }
     catch(err){        
         console.error(err)
