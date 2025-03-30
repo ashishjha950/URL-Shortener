@@ -27,6 +27,10 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.get('/api',verification)
 app.get('/api/logout',logout)
 
+app.use('/api',(req,res)=>{
+    res.send('API is working')
+})
+
 app.use('/api/ShortUrl',ShortUrl)
 app.use('/api/User',User)
 
