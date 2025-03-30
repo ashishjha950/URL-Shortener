@@ -14,7 +14,7 @@ dotenv.config()
 dbConnection()
 
 app.use(cors({
-    origin: ['http://localhost:5173',process.env.FRONTEND_URL],
+    origin: "*",
     methods: ['GET','POST'],
     credentials: true
 }))
