@@ -13,7 +13,11 @@ dotenv.config()
 
 dbConnection()
 
-app.use(cors({origin: "*"}))
+app.use(cors({
+    origin: process.env.FRONTEND_URL,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true
+  }));
 
 app.use(cookieParser())
 app.use(express.json())
@@ -23,8 +27,8 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.get('/api',verification)
 app.get('/api/logout',logout)
 
-app.use('/',(req,res)=>{
-    res.send('API is working')
+app.use('/check',(req,res)=>{
+    res.send('Server is working')
 })
 
 app.use('/api/ShortUrl',ShortUrl)

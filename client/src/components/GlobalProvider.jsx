@@ -4,7 +4,7 @@ const GlobalContext = createContext();
 
 const GlobalProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const apiUrl ='http://localhost:8100/api'
+  const apiUrl ='https://url-shortener-xzd7.onrender.com/api'
 
   return (
     <GlobalContext.Provider value={{isLoading, setIsLoading,apiUrl }}>
