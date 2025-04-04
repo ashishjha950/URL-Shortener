@@ -13,11 +13,7 @@ dotenv.config()
 
 dbConnection()
 
-app.use(cors({
-    origin: "*",
-    methods: ['GET','POST'],
-    credentials: true
-}))
+app.use(cors({origin: "*"}))
 
 app.use(cookieParser())
 app.use(express.json())
