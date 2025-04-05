@@ -5,7 +5,7 @@ import shortid from "shortid";
 
 const getShortendUrl = async (req, res) => {
   try {
-    const data = jwt.verify(req.cookies.token,process.env.JWT_SECRET)
+    const data = req.user
     if(data){
       const response = await ShortUrlModel.find({createdBy:data.id})
       return res.json(response);
@@ -15,7 +15,6 @@ const getShortendUrl = async (req, res) => {
     }
 
   } catch (error) {
-    console.error("error occurred in GET request of URL");
     res.status(500).send("Server Error");
   }
 }
@@ -29,7 +28,8 @@ const postShortendUrl = async (req, res) => {
 
     const shortID = shortid.generate()
 
-    const data = jwt.verify(req.cookies.token,process.env.JWT_SECRET)
+    const data = req.user
+    if(!data) return res.status(401).json({message:'Unauthorized'})
 
     const urls = await ShortUrlModel.create({
       shortID,
@@ -46,6 +46,7 @@ const postShortendUrl = async (req, res) => {
   } 
   catch (err) {
     console.error("error occured on posting of Short Url");
+    res.status(500).json({ error: "An error occurred while posting" });
   }
 }
 

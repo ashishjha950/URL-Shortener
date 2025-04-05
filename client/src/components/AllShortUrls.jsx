@@ -11,7 +11,11 @@ const AllShortUrls = () => {
   useEffect(()=>{
     const fetchData = async() => {
       setIsLoading(true)
-      const response = await axios.get(`${apiUrl}/shortUrl`,{ withCredentials: true })
+      const response = await axios.get(`${apiUrl}/shortUrl`, {
+        headers: { 
+            Authorization: `Bearer ${localStorage.getItem('token')}` 
+        }
+    });
       setFetchedData(response.data)
       setIsLoading(false)
     }

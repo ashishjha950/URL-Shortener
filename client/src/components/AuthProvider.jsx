@@ -7,7 +7,8 @@ const AuthProvider = ({children}) => {
     const [isLoggedIn,setIsLoggedIn] = useState(false)
 
     useEffect(()=>{
-        if(cookies.get('token')){
+        let token = localStorage.getItem('token')
+        if(token){
             setIsLoggedIn(true)
         }
         else{

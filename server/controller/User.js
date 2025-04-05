@@ -14,10 +14,10 @@ const verifyUser=async(req,res)=>{
 
         let token = jwt.sign({id:user._id,email:user.email},process.env.JWT_SECRET,{expiresIn:'1h'})
         
-        return res.cookie('token',token).status(200).json({message:'Successfully Login'})
+        return res.status(200).json({message:'Successfully Login',token})
     }
     catch(err){        
-        console.error(err)
+        return res.status(500).end({message:'Server Error'})
     }    
 }
 
@@ -35,11 +35,10 @@ const addNewUser=async(req,res)=>{
 
         let token = jwt.sign({id:user._id,email:user.email},process.env.JWT_SECRET,{expiresIn:'1h'})
         
-        // return res.cookie('token',token).status(200).end('New User Created')
-        return res.cookie('token',token,{ httpOnly: true }).status(200).end('New User Created')
+        return res.status(200).json({message:'New User Created',token})
     }
     catch(err){
-        console.error(err)
+        return res.status(500).end({message:'Server Error'})
     }
 }
 

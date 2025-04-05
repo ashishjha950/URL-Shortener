@@ -23,10 +23,11 @@ const Login = () => {
         e.preventDefault();
         try {
             setIsLoading(true)
-            const response = await axios.post(`${apiUrl}/User/login`, {formData},{ withCredentials: true })
+            const response = await axios.post(`${apiUrl}/User/login`, {formData})
             toast.success(response.data.message, { autoClose: 1000 });
             setIsLoggedIn(true)
-            navigate('/allShortUrls');            
+            navigate('/allShortUrls');
+            localStorage.setItem('token',response.data.token)
         } catch (error) {
             toast.error(error.response?.data || 'Something went wrong', { autoClose: 1000 });
             console.error(error)

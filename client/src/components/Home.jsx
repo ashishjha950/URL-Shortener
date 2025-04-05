@@ -24,7 +24,7 @@ const Home = () => {
         e.preventDefault();
         try {
             setIsLoading(true)
-            const res = await axios.post(`${apiUrl}/User`, {formData},{ withCredentials: true })
+            const res = await axios.post(`${apiUrl}/User`, {formData})
             setFormData({
                 fullName: "",
                 email: "",
@@ -35,6 +35,7 @@ const Home = () => {
             setIsLoggedIn(true)           
             navigate('/allShortUrls')
             setIsLoading(false)
+            localStorage.setItem('token',res.data.token)
                 
         } catch (error) {
             toast.error(error.response?.data || 'Something went wrong',{autoClose:1000})

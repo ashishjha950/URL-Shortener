@@ -23,7 +23,14 @@ const ShortUrl = () => {
     e.preventDefault();
     try {
       setIsLoading(true)
-      const response = await axios.post(`${apiUrl}/shortUrl`,{ originalUrl: formData },{ withCredentials: true })
+      const response = await axios.post(`${apiUrl}/shortUrl`, 
+        { originalUrl: formData }, 
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
       setFormData({
         url: "",
       })

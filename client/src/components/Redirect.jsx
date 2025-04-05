@@ -15,11 +15,12 @@ const Redirect = () => {
         e.preventDefault();
         try {
             setIsLoading(true)
-            const response = await axios.get(`${apiUrl}/shortUrl/${formData.shortID}`,{ withCredentials: true });
+            const response = await axios.get(`${apiUrl}/shortUrl/${formData.shortID}`);
             window.location.href = response.data;
         } catch (error) {
           toast.error(error.response.data,{autoClose:1000})
-            console.error(error)
+        } finally {
+            setIsLoading(false)
         }
     };
 
